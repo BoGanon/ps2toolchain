@@ -11177,7 +11177,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-dis.c binutils-2.14/opcodes/mips-dis.
 +          break;
 +    
 +        case '^':
-+          (*info->fprintf_func) (info->stream, "^");
++          (*info->fprintf_func) (info->stream, "Q");
 +          break;
 +    
 +        case '_':
