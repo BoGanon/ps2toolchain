@@ -11843,7 +11843,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
 +{"vmulz",   "&3=,2=,1#z", 0x4a00001a, 0xfe00003f,       0,              T5      },
 +{"vmula",   "&@=,2=,1=",  0x4a0002be, 0xfe0007ff,       0,              T5      },
 +{"vmulai",  "&@=,2=,!", 0x4a0001fe, 0xfe1f07ff, 0,                      T5      },
-+{"vmulaq",  "&@=,2=,+", 0x4a0001fc, 0xfe1f07ff, 0,                      T5      },
++{"vmulaq",  "&@=,2=,^", 0x4a0001fc, 0xfe1f07ff, 0,                      T5      },
 +{"vmulaw",  "&@=,2=,1#w", 0x4a0001bf, 0xfe0007ff,       0,              T5      },
 +{"vmulax",  "&@=,2=,1#x", 0x4a0001bc, 0xfe0007ff,       0,              T5      },
 +{"vmulay",  "&@=,2=,1#y", 0x4a0001bd, 0xfe0007ff,       0,              T5      },
