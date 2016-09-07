@@ -1,0 +1,972 @@
+diff -Nurp newlib-1.10.0-orig/libgloss/wince/Makefile.in newlib-1.10.0-new/libgloss/wince/Makefile.in
+--- newlib-1.10.0-orig/libgloss/wince/Makefile.in	2002-02-01 18:27:29.000000000 -0500
++++ newlib-1.10.0-new/libgloss/wince/Makefile.in	2016-09-07 12:17:58.036280540 -0400
+@@ -31,8 +31,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/doc/Makefile.in newlib-1.10.0-new/newlib/doc/Makefile.in
+--- newlib-1.10.0-orig/newlib/doc/Makefile.in	2002-02-01 18:27:27.000000000 -0500
++++ newlib-1.10.0-new/newlib/doc/Makefile.in	2016-09-07 12:17:58.040280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/ctype/Makefile.in newlib-1.10.0-new/newlib/libc/ctype/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/ctype/Makefile.in	2016-09-07 13:31:09.460280540 -0400
++++ newlib-1.10.0-new/newlib/libc/ctype/Makefile.in	2016-09-07 12:17:58.044280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/errno/Makefile.in newlib-1.10.0-new/newlib/libc/errno/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/errno/Makefile.in	2016-09-07 13:31:09.460280540 -0400
++++ newlib-1.10.0-new/newlib/libc/errno/Makefile.in	2016-09-07 12:17:58.044280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/locale/Makefile.in newlib-1.10.0-new/newlib/libc/locale/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/locale/Makefile.in	2016-09-07 13:31:09.468280540 -0400
++++ newlib-1.10.0-new/newlib/libc/locale/Makefile.in	2016-09-07 12:17:58.044280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/a29k/Makefile.in newlib-1.10.0-new/newlib/libc/machine/a29k/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/a29k/Makefile.in	2002-02-01 18:27:14.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/a29k/Makefile.in	2016-09-07 12:17:58.044280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/arm/Makefile.in newlib-1.10.0-new/newlib/libc/machine/arm/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/arm/Makefile.in	2002-02-01 18:27:15.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/arm/Makefile.in	2016-09-07 12:17:58.048280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/d10v/Makefile.in newlib-1.10.0-new/newlib/libc/machine/d10v/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/d10v/Makefile.in	2002-02-01 18:27:13.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/d10v/Makefile.in	2016-09-07 12:17:58.048280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/d30v/Makefile.in newlib-1.10.0-new/newlib/libc/machine/d30v/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/d30v/Makefile.in	2002-02-01 18:27:14.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/d30v/Makefile.in	2016-09-07 12:17:58.048280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/fr30/Makefile.in newlib-1.10.0-new/newlib/libc/machine/fr30/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/fr30/Makefile.in	2002-02-01 18:27:15.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/fr30/Makefile.in	2016-09-07 12:17:58.056280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/h8300/Makefile.in newlib-1.10.0-new/newlib/libc/machine/h8300/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/h8300/Makefile.in	2002-02-01 18:27:14.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/h8300/Makefile.in	2016-09-07 12:17:58.056280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/h8500/Makefile.in newlib-1.10.0-new/newlib/libc/machine/h8500/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/h8500/Makefile.in	2002-02-01 18:27:13.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/h8500/Makefile.in	2016-09-07 12:17:58.056280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/hppa/Makefile.in newlib-1.10.0-new/newlib/libc/machine/hppa/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/hppa/Makefile.in	2002-02-01 18:27:11.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/hppa/Makefile.in	2016-09-07 12:17:58.056280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/i386/Makefile.in newlib-1.10.0-new/newlib/libc/machine/i386/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/i386/Makefile.in	2002-02-01 18:27:11.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/i386/Makefile.in	2016-09-07 12:17:58.056280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/i960/Makefile.in newlib-1.10.0-new/newlib/libc/machine/i960/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/i960/Makefile.in	2002-02-01 18:27:12.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/i960/Makefile.in	2016-09-07 12:17:58.060280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/m32r/Makefile.in newlib-1.10.0-new/newlib/libc/machine/m32r/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/m32r/Makefile.in	2002-02-01 18:27:14.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/m32r/Makefile.in	2016-09-07 12:17:58.060280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/m68k/Makefile.in newlib-1.10.0-new/newlib/libc/machine/m68k/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/m68k/Makefile.in	2002-02-01 18:27:12.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/m68k/Makefile.in	2016-09-07 12:17:58.060280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/m88k/Makefile.in newlib-1.10.0-new/newlib/libc/machine/m88k/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/m88k/Makefile.in	2002-02-01 18:27:12.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/m88k/Makefile.in	2016-09-07 12:17:58.060280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/Makefile.in newlib-1.10.0-new/newlib/libc/machine/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/Makefile.in	2002-02-01 18:27:14.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/Makefile.in	2016-09-07 12:17:58.060280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/mips/Makefile.in newlib-1.10.0-new/newlib/libc/machine/mips/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/mips/Makefile.in	2002-02-01 18:27:14.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/mips/Makefile.in	2016-09-07 12:17:58.060280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/mn10200/Makefile.in newlib-1.10.0-new/newlib/libc/machine/mn10200/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/mn10200/Makefile.in	2002-02-01 18:27:13.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/mn10200/Makefile.in	2016-09-07 12:17:58.060280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/mn10300/Makefile.in newlib-1.10.0-new/newlib/libc/machine/mn10300/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/mn10300/Makefile.in	2002-02-01 18:27:13.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/mn10300/Makefile.in	2016-09-07 12:17:58.064280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/necv70/Makefile.in newlib-1.10.0-new/newlib/libc/machine/necv70/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/necv70/Makefile.in	2002-02-01 18:27:12.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/necv70/Makefile.in	2016-09-07 12:17:58.064280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/powerpc/Makefile.in newlib-1.10.0-new/newlib/libc/machine/powerpc/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/powerpc/Makefile.in	2002-02-01 18:27:14.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/powerpc/Makefile.in	2016-09-07 12:17:58.064280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/r5900/Makefile.in newlib-1.10.0-new/newlib/libc/machine/r5900/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/r5900/Makefile.in	2016-09-07 13:31:09.468280540 -0400
++++ newlib-1.10.0-new/newlib/libc/machine/r5900/Makefile.in	2016-09-07 12:17:58.068280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/sh/Makefile.in newlib-1.10.0-new/newlib/libc/machine/sh/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/sh/Makefile.in	2002-02-01 18:27:13.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/sh/Makefile.in	2016-09-07 12:17:58.072280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/sparc/Makefile.in newlib-1.10.0-new/newlib/libc/machine/sparc/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/sparc/Makefile.in	2002-02-01 18:27:14.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/sparc/Makefile.in	2016-09-07 12:17:58.072280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/tic80/Makefile.in newlib-1.10.0-new/newlib/libc/machine/tic80/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/tic80/Makefile.in	2002-02-01 18:27:13.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/tic80/Makefile.in	2016-09-07 12:17:58.072280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/v850/Makefile.in newlib-1.10.0-new/newlib/libc/machine/v850/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/v850/Makefile.in	2002-02-01 18:27:13.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/v850/Makefile.in	2016-09-07 12:17:58.072280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/w65/Makefile.in newlib-1.10.0-new/newlib/libc/machine/w65/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/w65/Makefile.in	2002-02-01 18:27:15.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/w65/Makefile.in	2016-09-07 12:17:58.072280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/xscale/Makefile.in newlib-1.10.0-new/newlib/libc/machine/xscale/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/xscale/Makefile.in	2002-02-01 18:27:13.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/xscale/Makefile.in	2016-09-07 12:17:58.072280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/machine/z8k/Makefile.in newlib-1.10.0-new/newlib/libc/machine/z8k/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/machine/z8k/Makefile.in	2002-02-01 18:27:11.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/machine/z8k/Makefile.in	2016-09-07 12:17:58.072280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/Makefile.in newlib-1.10.0-new/newlib/libc/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/Makefile.in	2016-09-07 13:31:09.452280540 -0400
++++ newlib-1.10.0-new/newlib/libc/Makefile.in	2016-09-07 12:17:58.076280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/misc/Makefile.in newlib-1.10.0-new/newlib/libc/misc/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/misc/Makefile.in	2016-09-07 13:31:09.480280540 -0400
++++ newlib-1.10.0-new/newlib/libc/misc/Makefile.in	2016-09-07 12:17:58.076280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/posix/Makefile.in newlib-1.10.0-new/newlib/libc/posix/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/posix/Makefile.in	2016-09-07 13:31:09.480280540 -0400
++++ newlib-1.10.0-new/newlib/libc/posix/Makefile.in	2016-09-07 12:17:58.076280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/reent/Makefile.in newlib-1.10.0-new/newlib/libc/reent/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/reent/Makefile.in	2016-09-07 13:31:09.484280540 -0400
++++ newlib-1.10.0-new/newlib/libc/reent/Makefile.in	2016-09-07 12:17:58.076280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/signal/Makefile.in newlib-1.10.0-new/newlib/libc/signal/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/signal/Makefile.in	2016-09-07 13:31:09.484280540 -0400
++++ newlib-1.10.0-new/newlib/libc/signal/Makefile.in	2016-09-07 12:17:58.076280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/stdio/Makefile.in newlib-1.10.0-new/newlib/libc/stdio/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/stdio/Makefile.in	2016-09-07 13:31:09.484280540 -0400
++++ newlib-1.10.0-new/newlib/libc/stdio/Makefile.in	2016-09-07 12:17:58.076280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/stdlib/Makefile.in newlib-1.10.0-new/newlib/libc/stdlib/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/stdlib/Makefile.in	2016-09-07 13:31:09.484280540 -0400
++++ newlib-1.10.0-new/newlib/libc/stdlib/Makefile.in	2016-09-07 12:17:58.080280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/string/Makefile.in newlib-1.10.0-new/newlib/libc/string/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/string/Makefile.in	2016-09-07 13:31:09.484280540 -0400
++++ newlib-1.10.0-new/newlib/libc/string/Makefile.in	2016-09-07 12:17:58.080280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/a29khif/Makefile.in newlib-1.10.0-new/newlib/libc/sys/a29khif/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/a29khif/Makefile.in	2002-02-01 18:27:22.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/a29khif/Makefile.in	2016-09-07 12:17:58.080280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/arc/Makefile.in newlib-1.10.0-new/newlib/libc/sys/arc/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/arc/Makefile.in	2002-02-01 18:27:20.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/arc/Makefile.in	2016-09-07 12:17:58.080280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/arm/Makefile.in newlib-1.10.0-new/newlib/libc/sys/arm/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/arm/Makefile.in	2002-02-01 18:27:22.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/arm/Makefile.in	2016-09-07 12:17:58.084280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/cygwin/Makefile.in newlib-1.10.0-new/newlib/libc/sys/cygwin/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/cygwin/Makefile.in	2002-02-01 18:27:21.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/cygwin/Makefile.in	2016-09-07 12:17:58.084280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/d10v/Makefile.in newlib-1.10.0-new/newlib/libc/sys/d10v/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/d10v/Makefile.in	2002-02-01 18:27:19.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/d10v/Makefile.in	2016-09-07 12:17:58.084280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/decstation/Makefile.in newlib-1.10.0-new/newlib/libc/sys/decstation/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/decstation/Makefile.in	2002-02-01 18:27:19.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/decstation/Makefile.in	2016-09-07 12:17:58.084280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/go32/Makefile.in newlib-1.10.0-new/newlib/libc/sys/go32/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/go32/Makefile.in	2002-02-01 18:27:20.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/go32/Makefile.in	2016-09-07 12:17:58.084280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/h8300hms/Makefile.in newlib-1.10.0-new/newlib/libc/sys/h8300hms/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/h8300hms/Makefile.in	2002-02-01 18:27:21.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/h8300hms/Makefile.in	2016-09-07 12:17:58.084280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/h8500hms/Makefile.in newlib-1.10.0-new/newlib/libc/sys/h8500hms/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/h8500hms/Makefile.in	2002-02-01 18:27:19.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/h8500hms/Makefile.in	2016-09-07 12:17:58.088280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/linux/Makefile.in newlib-1.10.0-new/newlib/libc/sys/linux/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/linux/Makefile.in	2002-02-01 18:27:18.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/linux/Makefile.in	2016-09-07 12:17:58.088280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/m88kbug/Makefile.in newlib-1.10.0-new/newlib/libc/sys/m88kbug/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/m88kbug/Makefile.in	2002-02-01 18:27:21.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/m88kbug/Makefile.in	2016-09-07 12:17:58.088280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/Makefile.in newlib-1.10.0-new/newlib/libc/sys/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/Makefile.in	2002-02-01 18:27:21.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/Makefile.in	2016-09-07 12:17:58.088280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/mmixware/Makefile.in newlib-1.10.0-new/newlib/libc/sys/mmixware/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/mmixware/Makefile.in	2002-02-01 18:27:18.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/mmixware/Makefile.in	2016-09-07 12:17:58.088280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/netware/Makefile.in newlib-1.10.0-new/newlib/libc/sys/netware/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/netware/Makefile.in	2002-02-01 18:27:19.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/netware/Makefile.in	2016-09-07 12:17:58.088280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/ps2/dlmalloc-ps2.c newlib-1.10.0-new/newlib/libc/sys/ps2/dlmalloc-ps2.c
+--- newlib-1.10.0-orig/newlib/libc/sys/ps2/dlmalloc-ps2.c	2016-09-07 13:31:09.500280540 -0400
++++ newlib-1.10.0-new/newlib/libc/sys/ps2/dlmalloc-ps2.c	2016-09-07 12:17:58.100280540 -0400
+@@ -3204,7 +3204,7 @@ static int sYSTRIm(pad, av) size_t pad;
+ /*
+   ------------------------------ malloc ------------------------------
+ */
+-
++__attribute__((weak))
+ #if __STD_C
+ Void_t* mALLOc(size_t bytes)
+ #else
+@@ -3577,7 +3577,7 @@ Void_t* mALLOc(size_t bytes)
+ /*
+   ------------------------------ free ------------------------------
+ */
+-
++__attribute__((weak))
+ #if __STD_C
+ void fREe(Void_t* mem)
+ #else
+@@ -3847,7 +3847,7 @@ static void malloc_consolidate(av) mstat
+   ------------------------------ realloc ------------------------------
+ */
+ 
+-
++__attribute__((weak))
+ #if __STD_C
+ Void_t* rEALLOc(Void_t* oldmem, size_t bytes)
+ #else
+@@ -4073,7 +4073,7 @@ Void_t* rEALLOc(oldmem, bytes) Void_t* o
+ /*
+   ------------------------------ memalign ------------------------------
+ */
+-
++__attribute__((weak))
+ #if __STD_C
+ Void_t* mEMALIGn(size_t alignment, size_t bytes)
+ #else
+@@ -4178,7 +4178,7 @@ Void_t* mEMALIGn(alignment, bytes) size_
+ /*
+   ------------------------------ calloc ------------------------------
+ */
+-
++__attribute__((weak))
+ #if __STD_C
+ Void_t* cALLOc(size_t n_elements, size_t elem_size)
+ #else
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/ps2/Makefile.in newlib-1.10.0-new/newlib/libc/sys/ps2/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/ps2/Makefile.in	2016-09-07 13:31:09.488280540 -0400
++++ newlib-1.10.0-new/newlib/libc/sys/ps2/Makefile.in	2016-09-07 12:17:58.100280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/rtems/Makefile.in newlib-1.10.0-new/newlib/libc/sys/rtems/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/rtems/Makefile.in	2002-02-01 18:27:22.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/rtems/Makefile.in	2016-09-07 12:17:58.104280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/sh/Makefile.in newlib-1.10.0-new/newlib/libc/sys/sh/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/sh/Makefile.in	2002-02-01 18:27:18.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/sh/Makefile.in	2016-09-07 12:17:58.104280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/sparc64/Makefile.in newlib-1.10.0-new/newlib/libc/sys/sparc64/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/sparc64/Makefile.in	2002-02-01 18:27:21.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/sparc64/Makefile.in	2016-09-07 12:17:58.104280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/sun4/Makefile.in newlib-1.10.0-new/newlib/libc/sys/sun4/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/sun4/Makefile.in	2002-02-01 18:27:17.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/sun4/Makefile.in	2016-09-07 12:17:58.104280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/sysmec/Makefile.in newlib-1.10.0-new/newlib/libc/sys/sysmec/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/sysmec/Makefile.in	2002-02-01 18:27:17.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/sysmec/Makefile.in	2016-09-07 12:17:58.104280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/sysnec810/Makefile.in newlib-1.10.0-new/newlib/libc/sys/sysnec810/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/sysnec810/Makefile.in	2002-02-01 18:27:18.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/sysnec810/Makefile.in	2016-09-07 12:17:58.104280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/sysnecv850/Makefile.in newlib-1.10.0-new/newlib/libc/sys/sysnecv850/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/sysnecv850/Makefile.in	2002-02-01 18:27:19.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/sysnecv850/Makefile.in	2016-09-07 12:17:58.104280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/sysvi386/Makefile.in newlib-1.10.0-new/newlib/libc/sys/sysvi386/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/sysvi386/Makefile.in	2002-02-01 18:27:19.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/sysvi386/Makefile.in	2016-09-07 12:17:58.108280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/sysvnecv70/Makefile.in newlib-1.10.0-new/newlib/libc/sys/sysvnecv70/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/sysvnecv70/Makefile.in	2002-02-01 18:27:17.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/sysvnecv70/Makefile.in	2016-09-07 12:17:58.108280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/tic80/Makefile.in newlib-1.10.0-new/newlib/libc/sys/tic80/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/tic80/Makefile.in	2002-02-01 18:27:19.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/tic80/Makefile.in	2016-09-07 12:17:58.108280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/w65/Makefile.in newlib-1.10.0-new/newlib/libc/sys/w65/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/w65/Makefile.in	2002-02-01 18:27:22.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/w65/Makefile.in	2016-09-07 12:17:58.108280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/sys/z8ksim/Makefile.in newlib-1.10.0-new/newlib/libc/sys/z8ksim/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/sys/z8ksim/Makefile.in	2002-02-01 18:27:19.000000000 -0500
++++ newlib-1.10.0-new/newlib/libc/sys/z8ksim/Makefile.in	2016-09-07 12:17:58.108280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/syscalls/Makefile.in newlib-1.10.0-new/newlib/libc/syscalls/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/syscalls/Makefile.in	2016-09-07 13:31:09.504280540 -0400
++++ newlib-1.10.0-new/newlib/libc/syscalls/Makefile.in	2016-09-07 12:17:58.108280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/time/Makefile.in newlib-1.10.0-new/newlib/libc/time/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/time/Makefile.in	2016-09-07 13:31:09.504280540 -0400
++++ newlib-1.10.0-new/newlib/libc/time/Makefile.in	2016-09-07 12:17:58.108280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libc/unix/Makefile.in newlib-1.10.0-new/newlib/libc/unix/Makefile.in
+--- newlib-1.10.0-orig/newlib/libc/unix/Makefile.in	2016-09-07 13:31:09.504280540 -0400
++++ newlib-1.10.0-new/newlib/libc/unix/Makefile.in	2016-09-07 12:17:58.112280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libm/common/Makefile.in newlib-1.10.0-new/newlib/libm/common/Makefile.in
+--- newlib-1.10.0-orig/newlib/libm/common/Makefile.in	2002-02-01 18:27:23.000000000 -0500
++++ newlib-1.10.0-new/newlib/libm/common/Makefile.in	2016-09-07 12:17:58.112280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libm/machine/i386/Makefile.in newlib-1.10.0-new/newlib/libm/machine/i386/Makefile.in
+--- newlib-1.10.0-orig/newlib/libm/machine/i386/Makefile.in	2002-02-01 18:27:23.000000000 -0500
++++ newlib-1.10.0-new/newlib/libm/machine/i386/Makefile.in	2016-09-07 12:17:58.112280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libm/machine/Makefile.in newlib-1.10.0-new/newlib/libm/machine/Makefile.in
+--- newlib-1.10.0-orig/newlib/libm/machine/Makefile.in	2002-02-01 18:27:23.000000000 -0500
++++ newlib-1.10.0-new/newlib/libm/machine/Makefile.in	2016-09-07 12:17:58.112280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libm/Makefile.in newlib-1.10.0-new/newlib/libm/Makefile.in
+--- newlib-1.10.0-orig/newlib/libm/Makefile.in	2002-02-01 18:27:25.000000000 -0500
++++ newlib-1.10.0-new/newlib/libm/Makefile.in	2016-09-07 12:17:58.112280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libm/math/Makefile.in newlib-1.10.0-new/newlib/libm/math/Makefile.in
+--- newlib-1.10.0-orig/newlib/libm/math/Makefile.in	2002-02-01 18:27:27.000000000 -0500
++++ newlib-1.10.0-new/newlib/libm/math/Makefile.in	2016-09-07 12:17:58.112280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/libm/mathfp/Makefile.in newlib-1.10.0-new/newlib/libm/mathfp/Makefile.in
+--- newlib-1.10.0-orig/newlib/libm/mathfp/Makefile.in	2002-02-01 18:27:26.000000000 -0500
++++ newlib-1.10.0-new/newlib/libm/mathfp/Makefile.in	2016-09-07 12:17:58.116280540 -0400
+@@ -33,8 +33,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
+diff -Nurp newlib-1.10.0-orig/newlib/Makefile.in newlib-1.10.0-new/newlib/Makefile.in
+--- newlib-1.10.0-orig/newlib/Makefile.in	2002-02-01 18:27:27.000000000 -0500
++++ newlib-1.10.0-new/newlib/Makefile.in	2016-09-07 12:17:58.116280540 -0400
+@@ -32,8 +32,6 @@ mandir = @mandir@
+ includedir = @includedir@
+ oldincludedir = /usr/include
+ 
+-DESTDIR =
+-
+ pkgdatadir = $(datadir)/@PACKAGE@
+ pkglibdir = $(libdir)/@PACKAGE@
+ pkgincludedir = $(includedir)/@PACKAGE@
