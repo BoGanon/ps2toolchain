@@ -1,0 +1,176 @@
+diff -Nurp ../gcc-3.2.3/configure.in ./configure.in
+--- ../gcc-3.2.3/configure.in	2016-09-09 11:06:53.081871219 -0400
++++ ./configure.in	2016-09-10 02:33:43.271134449 -0400
+@@ -460,6 +460,7 @@ copy_dirs=
+ 
+ # Handle --with-headers=XXX.  The contents of the named directory are
+ # copied to $(tooldir)/sys-include.
++# We already do this when building/installing newlib into $(tooldir)/include
+ if [ x"${with_headers}" != x ]; then
+   if [ x${is_cross_compiler} = xno ]; then
+     echo 1>&2 '***' --with-headers is only supported when cross compiling
+@@ -469,11 +470,12 @@ if [ x"${with_headers}" != x ]; then
+   "") x=${prefix} ;;
+   *) x=${exec_prefix} ;;
+   esac
+-  copy_dirs="${copy_dirs} ${with_headers} $x/${target_alias}/sys-include"
++#  copy_dirs="${copy_dirs} ${with_headers} $x/${target_alias}/include"
+ fi
+ 
+ # Handle --with-libs=XXX.  Multiple directories are permitted.  The
+ # contents are copied to $(tooldir)/lib.
++# We already do this when building/installing newlib into $(tooldir)/lib
+ if [ x"${with_libs}" != x ]; then
+   if [ x${is_cross_compiler} = xno ]; then
+     echo 1>&2 '***' --with-libs is only supported when cross compiling
+@@ -485,9 +487,9 @@ if [ x"${with_libs}" != x ]; then
+   "") x=${prefix} ;;
+   *) x=${exec_prefix} ;;
+   esac
+-  for l in ${with_libs}; do
+-    copy_dirs="$l $x/${target_alias}/lib ${copy_dirs}"
+-  done
++#  for l in ${with_libs}; do
++#    copy_dirs="$l $x/${target_alias}/lib ${copy_dirs}"
++#  done
+ fi
+ 
+ # If both --with-headers and --with-libs are specified, default to
+@@ -518,35 +520,36 @@ if [ x${with_stabs} = x ]; then
+ fi
+ 
+ # Handle ${copy_dirs}
+-set fnord ${copy_dirs}
+-shift
+-while [ $# != 0 ]; do
+-  if [ -f $2/COPIED ] && [ x"`cat $2/COPIED`" = x"$1" ]; then
+-    :
+-  else
+-    echo Copying $1 to $2
++# We shouldn't install things to places where we may not be permitted.
++#set fnord ${copy_dirs}
++#shift
++#while [ $# != 0 ]; do
++#  if [ -f $2/COPIED ] && [ x"`cat $2/COPIED`" = x"$1" ]; then
++#    :
++#  else
++#    echo Copying $1 to $2
+ 
+     # Use the install script to create the directory and all required
+     # parent directories.
+-    if [ -d $2 ]; then
+-      :
+-    else
+-      echo >config.temp
+-      ${srcdir}/install-sh -c -m 644 config.temp $2/COPIED
+-    fi
++#    if [ -d $2 ]; then
++#      :
++#    else
++#      echo >config.temp
++#      ${srcdir}/install-sh -c -m 644 config.temp $2/COPIED
++#    fi
+ 
+     # Copy the directory, assuming we have tar.
+     # FIXME: Should we use B in the second tar?  Not all systems support it.
+-    (cd $1; tar -cf - .) | (cd $2; tar -xpf -)
++#    (cd $1; tar -cf - .) | (cd $2; tar -xpf -)
+ 
+     # It is the responsibility of the user to correctly adjust all
+     # symlinks.  If somebody can figure out how to handle them correctly
+     # here, feel free to add the code.
+ 
+-    echo $1 > $2/COPIED
+-  fi
+-  shift; shift
+-done
++#    echo $1 > $2/COPIED
++#  fi
++#  shift; shift
++#done
+ 
+ # Configure extra directories which are host specific
+ 
+diff -Nurp ../gcc-3.2.3/gcc/Makefile.in ./gcc/Makefile.in
+--- ../gcc-3.2.3/gcc/Makefile.in	2016-09-09 11:06:53.137899219 -0400
++++ ./gcc/Makefile.in	2016-09-10 02:22:06.631134449 -0400
+@@ -162,7 +162,7 @@ USER_H = $(srcdir)/ginclude/stdarg.h $(s
+ # The GCC to use for compiling libgcc.a, enquire, and crt*.o.
+ # Usually the one we just built.
+ # Don't use this as a dependency--use $(GCC_PASSES) or $(GCC_PARTS).
+-GCC_FOR_TARGET = ./xgcc -B./ -B$(build_tooldir)/bin/ -isystem $(build_tooldir)/include -isystem $(build_tooldir)/sys-include
++GCC_FOR_TARGET = ./xgcc -B./ -B$(build_tooldir)/bin/ -isystem $(build_tooldir)/include
+ 
+ # This is used instead of ALL_CFLAGS when compiling with GCC_FOR_TARGET.
+ # It omits XCFLAGS, and specifies -B./.
+@@ -234,7 +234,7 @@ FIBHEAP_H   = $(srcdir)/../include/fibhe
+ # Default native SYSTEM_HEADER_DIR, to be overridden by targets.
+ NATIVE_SYSTEM_HEADER_DIR = /usr/include
+ # Default cross SYSTEM_HEADER_DIR, to be overridden by targets.
+-CROSS_SYSTEM_HEADER_DIR = $(build_tooldir)/sys-include
++CROSS_SYSTEM_HEADER_DIR = $(build_tooldir)/include
+ 
+ # autoconf sets SYSTEM_HEADER_DIR to one of the above.
+ SYSTEM_HEADER_DIR = @SYSTEM_HEADER_DIR@
+@@ -1965,7 +1965,7 @@ PREPROCESSOR_DEFINES = \
+   -DGPLUSPLUS_TOOL_INCLUDE_DIR=\"$(gcc_gxx_include_dir)/$(target_alias)\" \
+   -DGPLUSPLUS_BACKWARD_INCLUDE_DIR=\"$(gcc_gxx_include_dir)/backward\" \
+   -DLOCAL_INCLUDE_DIR=\"$(local_includedir)\" \
+-  -DCROSS_INCLUDE_DIR=\"$(gcc_tooldir)/sys-include\" \
++  -DCROSS_INCLUDE_DIR=\"$(gcc_tooldir)/include\" \
+   -DTOOL_INCLUDE_DIR=\"$(gcc_tooldir)/include\"
+ 
+ LIBCPP_OBJS =	cpplib.o cpplex.o cppmacro.o cppexp.o cppfiles.o \
+@@ -2154,7 +2154,19 @@ fixinc.sh: $(FIXINCSRCDIR)/mkfixinc.sh $
+ 	$(SHELL) $${srcdir}/mkfixinc.sh $(build_canonical) $(target))
+ 
+ # Build fixed copies of system files.
++# If building a cross compiler to build newlib, i.e. --without-headers,
++# then ${SYSTEM_HEADER_DIR} should not exist
++# If building a cross compiler after building and installing newlib,
++# or other libc for the target, i.e. --with-headers,
++# then ${SYSTEM_HEADER_DIR} should exist
++
+ stmp-fixinc: fixinc.sh gsyslimits.h
++	@if test ! -d ${SYSTEM_HEADER_DIR}; then \
++	  echo The directory that should contain system headers does not exist: >&2 ; \
++	  echo "  ${SYSTEM_HEADER_DIR}" >&2 ; \
++	  if test "x${SYSTEM_HEADER_DIR}" = "x${build_tooldir}/include"; \
++	  then sleep 1; else exit 1; fi; \
++	fi
+ 	rm -rf include; mkdir include
+ 	-chmod a+rx include
+ 	(TARGET_MACHINE='$(target)'; srcdir=`cd $(srcdir); pwd`; \
+@@ -2168,20 +2180,6 @@ stmp-fixinc: fixinc.sh gsyslimits.h
+ 	  cp $(srcdir)/gsyslimits.h include/syslimits.h; \
+ 	fi; \
+ 	chmod a+r include/syslimits.h)
+-# If $(SYSTEM_HEADER_DIR) is $(build_tooldir)/sys-include, and
+-# that directory exists, then make sure that $(libsubdir) exists.
+-# This is because cpp is compiled to find $(gcc_tooldir)/include via
+-# $(libsubdir)/$(unlibsubdir), which will only work if $(libsubdir)
+-# exists.
+-# ??? Better would be to use -isystem $(build_tooldir)/sys-include,
+-# but fixincludes does not take such arguments.
+-	if [ "$(SYSTEM_HEADER_DIR)" = "$(build_tooldir)/sys-include" ] \
+-	   && [ -d $(build_tooldir)/sys-include ]; then \
+-	  if [ -d $(libdir) ] ; then true ; else mkdir $(libdir) ; fi; \
+-	  if [ -d $(libdir)/gcc-lib ] ; then true ; else mkdir $(libdir)/gcc-lib; fi; \
+-	  if [ -d $(libdir)/gcc-lib/$(target_alias) ] ; then true ; else mkdir $(libdir)/gcc-lib/$(target_alias) ; fi; \
+-	  if [ -d $(libdir)/gcc-lib/$(target_alias)/$(version) ] ; then true ; else mkdir $(libdir)/gcc-lib/$(target_alias)/$(version) ; fi; \
+-	else true; fi
+ 	$(STAMP) stmp-fixinc
+ 
+ # Files related to the fixproto script.
+diff -Nurp ../gcc-3.2.3/libiberty/Makefile.in ./libiberty/Makefile.in
+--- ../gcc-3.2.3/libiberty/Makefile.in	2003-02-02 16:15:38.000000000 -0500
++++ ./libiberty/Makefile.in	2016-09-09 11:05:35.182941219 -0400
+@@ -237,7 +237,7 @@ libiberty.html : $(srcdir)/libiberty.tex
+ @MAINT@	echo stamp > stamp-functions
+ 
+ INSTALL_DEST = @INSTALL_DEST@
+-install: install_to_$(INSTALL_DEST) install-subdir
++install: install-subdir
+ 
+ install_to_libdir: all
+ 	$(mkinstalldirs) $(DESTDIR)$(libdir)$(MULTISUBDIR)
