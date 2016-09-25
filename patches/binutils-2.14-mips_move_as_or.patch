@@ -1,0 +1,100 @@
+diff -Nurp binutils-2.14/bfd/elfxx-mips.c binutils-2.14-new/bfd/elfxx-mips.c
+--- binutils-2.14/bfd/elfxx-mips.c	2016-09-24 22:13:47.705527001 -0400
++++ binutils-2.14-new/bfd/elfxx-mips.c	2016-09-24 23:57:54.629527001 -0400
+@@ -496,8 +496,11 @@ static struct mips_got_info *mips_elf_go
+ /* This will be used when we sort the dynamic relocation records.  */
+ static bfd *reldyn_sorting_bfd;
+ 
+-/* Nonzero if ABFD is using the N32 ABI.  */
++/* Nonzero if ABFD is for the r5900 */
++#define MIPS_MACH_5900(abfd) \
++  ((elf_elfheader (abfd)->e_flags & EF_MIPS_MACH) == E_MIPS_MACH_5900)
+ 
++/* Nonzero if ABFD is using the N32 ABI.  */
+ #define ABI_N32_P(abfd) \
+   ((elf_elfheader (abfd)->e_flags & EF_MIPS_ABI2) != 0)
+ 
+@@ -607,8 +610,9 @@ static bfd *reldyn_sorting_bfd;
+   ((ABI_64_P (abfd)  						\
+     ? 0xdf998010		/* ld t9,0x8010(gp) */		\
+     : 0x8f998010))              /* lw t9,0x8010(gp) */
+-#define STUB_MOVE(abfd)                                         \
+-  (SGI_COMPAT (abfd) ? 0x03e07825 : 0x03e07821)         /* move t7,ra */
++/* The r5900 uses a 128-bit "por" register move. */
++#define STUB_MOVE(abfd) \
++  (MIPS_MACH_5900 (abfd) ? 0x73e07ca9 : 0x03e07825)	/* move t7,ra */
+ #define STUB_JALR 0x0320f809				/* jal t9 */
+ #define STUB_LI16(abfd)                                         \
+   (SGI_COMPAT (abfd) ? 0x34180000 : 0x24180000)         /* ori t8,zero,0 */
+diff -Nurp binutils-2.14/gas/config/tc-mips.c binutils-2.14-new/gas/config/tc-mips.c
+--- binutils-2.14/gas/config/tc-mips.c	2016-09-24 22:13:47.729527001 -0400
++++ binutils-2.14-new/gas/config/tc-mips.c	2016-09-24 23:05:41.109527001 -0400
+@@ -4193,9 +4193,12 @@ move_register (counter, dest, source)
+      int dest;
+      int source;
+ {
+-  macro_build ((char *) NULL, counter, (expressionS *) NULL,
+-	       HAVE_32BIT_GPRS ? "addu" : "daddu",
+-	       "d,v,t", dest, source, 0);
++
++  /* Always do 128-bit register moves for the r5900. */
++    macro_build ((char *) NULL, counter, (expressionS *) NULL,
++		 (mips_arch == CPU_R5900) ? "por" : "or",
++	         "d,v,t", dest, source, 0);
++
+ }
+ 
+ /*
+@@ -13309,7 +13312,7 @@ s_cpload (ignore)
+      daddu	$gp, $gp, $reg1
+ 
+    If $reg2 is given, this results in:
+-     daddu	$reg2, $gp, $0
++     or		$reg2, $gp, $0
+      lui	$gp, %hi(%neg(%gp_rel(label)))
+      addiu	$gp, $gp, %lo(%neg(%gp_rel(label)))
+      daddu	$gp, $gp, $reg1
+@@ -13374,8 +13377,7 @@ s_cpsetup (ignore)
+ 		   mips_gp_register, (int) BFD_RELOC_LO16, SP);
+     }
+   else
+-    macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "daddu",
+-		 "d,v,t", mips_cpreturn_register, mips_gp_register, 0);
++    move_register (&icnt, mips_cpreturn_register, mips_gp_register);
+ 
+   /* Ensure there's room for the next two instructions, so that `f'
+      doesn't end up with an address in the wrong frag.  */
+@@ -13458,7 +13460,7 @@ s_cprestore (ignore)
+      ld		$gp, offset($sp)
+ 
+    If a register $reg2 was given there, it results in:
+-     daddiu	$gp, $gp, $reg2
++     or		$gp, $reg2, $0
+  */
+ static void
+ s_cpreturn (ignore)
+@@ -13486,8 +13488,7 @@ s_cpreturn (ignore)
+ 		   mips_gp_register, (int) BFD_RELOC_LO16, SP);
+     }
+   else
+-    macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "daddu",
+-		 "d,v,t", mips_gp_register, mips_cpreturn_register, 0);
++    move_register (&icnt, mips_gp_register, mips_cpreturn_register);
+ 
+   demand_empty_rest_of_line ();
+ }
+diff -Nurp binutils-2.14/opcodes/mips-opc.c binutils-2.14-new/opcodes/mips-opc.c
+--- binutils-2.14/opcodes/mips-opc.c	2016-09-24 22:13:47.749527001 -0400
++++ binutils-2.14-new/opcodes/mips-opc.c	2016-09-25 00:00:35.353527001 -0400
+@@ -149,9 +149,10 @@ const struct mips_opcode mips_builtin_op
+ {"li",	    "t,i",	0x34000000, 0xffe00000, WR_t,			I1	}, /* ori */
+ {"li",      "t,I",	0,    (int) M_LI,	INSN_MACRO,		I1	},
+ {"move",    "d,s",	0,    (int) M_MOVE,	INSN_MACRO,		I1	},
++{"move",    "d,s",	0x700004a9, 0xfc1f07ff, WR_d|RD_s,		T5	},/* por */
++{"move",    "d,s",	0x00000025, 0xfc1f07ff,	WR_d|RD_s,		I1	},/* or */
+ {"move",    "d,s",	0x0000002d, 0xfc1f07ff, WR_d|RD_s,		I3	},/* daddu */
+ {"move",    "d,s",	0x00000021, 0xfc1f07ff, WR_d|RD_s,		I1	},/* addu */
+-{"move",    "d,s",	0x00000025, 0xfc1f07ff,	WR_d|RD_s,		I1	},/* or */
+ {"b",       "p",	0x10000000, 0xffff0000,	UBD,			I1	},/* beq 0,0 */
+ {"b",       "p",	0x04010000, 0xffff0000,	UBD,			I1	},/* bgez 0 */
+ {"bal",     "p",	0x04110000, 0xffff0000,	UBD|WR_31,		I1	},/* bgezal 0*/

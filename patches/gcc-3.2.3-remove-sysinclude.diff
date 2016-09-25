@@ -162,15 +162,3 @@ diff -Nurp ../gcc-3.2.3/gcc/Makefile.in ./gcc/Makefile.in
  	$(STAMP) stmp-fixinc
  
  # Files related to the fixproto script.
-diff -Nurp ../gcc-3.2.3/libiberty/Makefile.in ./libiberty/Makefile.in
---- ../gcc-3.2.3/libiberty/Makefile.in	2003-02-02 16:15:38.000000000 -0500
-+++ ./libiberty/Makefile.in	2016-09-09 11:05:35.182941219 -0400
-@@ -237,7 +237,7 @@ libiberty.html : $(srcdir)/libiberty.tex
- @MAINT@	echo stamp > stamp-functions
- 
- INSTALL_DEST = @INSTALL_DEST@
--install: install_to_$(INSTALL_DEST) install-subdir
-+install: install-subdir
- 
- install_to_libdir: all
- 	$(mkinstalldirs) $(DESTDIR)$(libdir)$(MULTISUBDIR)
