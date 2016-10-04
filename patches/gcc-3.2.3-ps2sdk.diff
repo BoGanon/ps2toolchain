@@ -1,0 +1,50 @@
+diff -Nurp gcc-3.2.3-old/libiberty/configure gcc-3.2.3/libiberty/configure
+--- gcc-3.2.3-old/libiberty/configure	2016-10-04 04:23:05.527986328 -0400
++++ gcc-3.2.3/libiberty/configure	2016-10-04 04:43:36.227983096 -0400
+@@ -2078,6 +2078,34 @@ EOF
+ 
+   fi
+ 
++  # PS2SDK's libc provides everything but these
++  if test "x${with_ps2sdk}" = "xyes"; then
++    LIBOBJS="ffs.o getpagesize.o insque.o mkstemps.o putenv.o random.o sigsetmask.o tmpnam.o waitpid.o"
++
++    for f in $funcs; do
++      case "$f" in
++	ffs | getpagesize | insque | mkstemps | putenv | random | sigsetmask | tmpnam | waitpid)
++	  ;;
++	*)
++	  n=HAVE_`echo $f | tr 'abcdefghijklmnopqrstuvwxyz' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'`
++	  cat >> confdefs.h <<EOF
++#define $n 1
++EOF
++
++	  ;;
++      esac
++    done
++
++    # PS2SDK doesn't yet have anything in $checkfuncs
++    #cat >> confdefs.h <<\EOF
++#define HAVE_STRERROR 1
++#EOF
++
++
++    setobjs=yes
++
++  fi
++
+ else
+ 
+    # Not a target library, so we set things up to run the test suite.
+diff -Nurp gcc-3.2.3-old/libstdc++-v3/configure gcc-3.2.3/libstdc++-v3/configure
+--- gcc-3.2.3-old/libstdc++-v3/configure	2016-10-04 04:23:05.535990327 -0400
++++ gcc-3.2.3/libstdc++-v3/configure	2016-10-04 02:47:39.514448981 -0400
+@@ -8748,7 +8748,7 @@ EOF
+ 
+       ;;
+     *)
+-      os_include_dir="config/os/newlib"
++      os_include_dir="config/os/generic"
+       cat >> confdefs.h <<\EOF
+ #define HAVE_HYPOT 1
+ EOF
