@@ -36,6 +36,37 @@ diff -Nurp gcc-3.2.3-old/libiberty/configure gcc-3.2.3/libiberty/configure
  else
  
     # Not a target library, so we set things up to run the test suite.
+diff -Nurp gcc-3.2.3-old/libiberty/configure.in gcc-3.2.3/libiberty/configure.in
+--- gcc-3.2.3-old/libiberty/configure.in	2003-04-14 10:22:13.000000000 -0400
++++ gcc-3.2.3/libiberty/configure.in	2016-10-05 21:38:46.628328936 -0400
+@@ -245,6 +245,27 @@ if test -n "${with_target_subdir}"; then
+ 
+   fi
+ 
++  # PS2SDK's libc provides everything but these
++  if test "x${with_ps2sdk}" = "xyes"; then
++    LIBOBJS="ffs.o getpagesize.o insque.o mkstemps.o putenv.o random.o sigsetmask.o tmpnam.o waitpid.o"
++
++    for f in $funcs; do
++      case "$f" in
++	ffs | getpagesize | insque | mkstemps | putenv | random | sigsetmask | tmpnam | waitpid)
++	  ;;
++	*)
++	  n=HAVE_`echo $f | tr 'abcdefghijklmnopqrstuvwxyz' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'`
++	  AC_DEFINE_UNQUOTED($n)
++	  ;;
++      esac
++    done
++
++    # PS2SDK doesn't yet have anything in $checkfuncs
++
++    setobjs=yes
++
++  fi
++
+ else
+ 
+    # Not a target library, so we set things up to run the test suite.
 diff -Nurp gcc-3.2.3-old/libstdc++-v3/configure gcc-3.2.3/libstdc++-v3/configure
 --- gcc-3.2.3-old/libstdc++-v3/configure	2016-10-04 04:23:05.535990327 -0400
 +++ gcc-3.2.3/libstdc++-v3/configure	2016-10-04 02:47:39.514448981 -0400
@@ -48,3 +79,15 @@ diff -Nurp gcc-3.2.3-old/libstdc++-v3/configure gcc-3.2.3/libstdc++-v3/configure
        cat >> confdefs.h <<\EOF
  #define HAVE_HYPOT 1
  EOF
+diff -Nurp gcc-3.2.3-old/libstdc++-v3/configure.in gcc-3.2.3/libstdc++-v3/configure.in
+--- gcc-3.2.3-old/libstdc++-v3/configure.in	2003-02-05 11:37:00.000000000 -0500
++++ gcc-3.2.3/libstdc++-v3/configure.in	2016-10-05 21:35:27.705897507 -0400
+@@ -180,7 +180,7 @@ changequote([,])dnl
+       AC_DEFINE(HAVE_SINHL)
+       ;;
+     *)
+-      os_include_dir="config/os/newlib"
++      os_include_dir="config/os/generic"
+       AC_DEFINE(HAVE_HYPOT)
+       ;;
+   esac
