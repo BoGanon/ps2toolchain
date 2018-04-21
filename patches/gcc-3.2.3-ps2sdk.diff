@@ -91,15 +91,3 @@ diff -Nurp gcc-3.2.3-old/libstdc++-v3/configure.in gcc-3.2.3/libstdc++-v3/config
        AC_DEFINE(HAVE_HYPOT)
        ;;
    esac
-diff -Nurp gcc-3.2.3-old/libstdc++-v3/configure.target gcc-3.2.3/libstdc++-v3/configure.target
---- gcc-3.2.3-old/libstdc++-v3/configure.target	2016-10-04 03:52:09.845965951 -0400
-+++ gcc-3.2.3/libstdc++-v3/configure.target	2016-10-10 20:38:39.573646166 -0400
-@@ -56,7 +56,7 @@ case "${target_cpu}" in
-     cpu_include_dir="config/cpu/m68k"
-     ;;
-   mips)
--    cpu_include_dir="config/cpu/mips"
-+    cpu_include_dir="config/cpu/generic"
-     ;;
-   powerpc | rs6000)
-     cpu_include_dir="config/cpu/powerpc"

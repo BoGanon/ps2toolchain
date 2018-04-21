@@ -5625,7 +5625,7 @@ diff -rupNb gcc-3.2.3/libstdc++-v3/configure.target gcc-3.2.3-new/libstdc++-v3/c
      cpu_include_dir="config/cpu/m68k"
      ;;
 +  mips)
-+    cpu_include_dir="config/cpu/mips"
++    cpu_include_dir="config/cpu/generic"
 +    ;;
    powerpc | rs6000)
      cpu_include_dir="config/cpu/powerpc"
