@@ -1,0 +1,88 @@
+diff -Nurp gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.c
+--- gcc-3.2.3/gcc/config/mips/mips.c	2016-09-09 11:06:53.105883218 -0400
++++ gcc-3.2.3-new/gcc/config/mips/mips.c	2016-09-25 21:24:55.878073657 -0400
+@@ -138,7 +138,13 @@ static int iris6_section_align_1		PARAMS
+ static int mips_adjust_cost			PARAMS ((rtx, rtx, rtx, int));
+ 
+ /* R5900 (Emotion Engine) support. */
+-static enum sequence_type r5900_detect_sequence_type PARAMS ((rtx, int *, rtx *,
++enum r5900_sequence_type {
++    Jump,
++    Reset,
++    Other
++  };
++  
++static enum r5900_sequence_type r5900_detect_sequence_type PARAMS ((rtx, int *, rtx *,
+ 							    int *, int));
+ static void r5900_lengthen_loops		PARAMS ((rtx, int));
+ static void r5900_sched_init			PARAMS ((void));
+@@ -5463,7 +5469,7 @@ override_options ()
+ 	    }
+ 
+ 	  /* General registers can hold TImode values on the r5900.  */
+-	  else if (GP_REG_P (regno) && mode == TImode && TARGET_MIPS5900)
++	  else if (GP_REG_P (regno) && (mode == TImode && TARGET_MIPS5900))
+ 	    temp = 1;
+ 
+ 	  else if (GP_REG_P (regno))
+@@ -9945,11 +9951,9 @@ machine_dependent_reorg (first)
+ 
+ #define NOP_INSN_P(INSN) (rtx_equal_p (INSN, gen_nop ()))
+ 
+-enum sequence_type {Jump, Reset, Other};
+-
+ /* Detect if possible loop jump presents in the sequence */
+ 
+-static enum sequence_type 
++static enum r5900_sequence_type 
+ r5900_detect_sequence_type (insn, count_p, jump_insn_p, seen_before, 
+ 			after_delayed_branch_sched)
+ 	rtx insn;
+@@ -10019,7 +10023,7 @@ r5900_lengthen_loops (first, after_delay
+   int max_uid = get_max_uid ();
+   int *seen_before = alloca (sizeof seen_before[0] * max_uid);
+   int in_sequence = 0;
+-  enum sequence_type result;
++  enum r5900_sequence_type result;
+ 
+   /*bzero ((char *) seen_before, sizeof seen_before[0] * max_uid);*/
+   memset((char *) seen_before, 0, sizeof seen_before[0] * max_uid);
+@@ -10651,7 +10655,7 @@ mips_hard_regno_nregs (regno, mode)
+     enum machine_mode mode;
+ {
+   /* TODO: Add r5900 dual mode register support. */
+-  if (TARGET_MIPS5900 && GP_REG_P (regno) && mode == TImode)
++  if ((mode == TImode && TARGET_MIPS5900) && GP_REG_P (regno))
+     return 1;
+   else if (! FP_REG_P (regno))
+     return ((GET_MODE_SIZE (mode) + UNITS_PER_WORD - 1) / UNITS_PER_WORD);
+diff -Nurp gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips.md
+--- gcc-3.2.3/gcc/config/mips/mips.md	2016-09-09 11:06:53.121891219 -0400
++++ gcc-3.2.3-new/gcc/config/mips/mips.md	2016-09-09 03:18:20.505331224 -0400
+@@ -1912,7 +1912,7 @@
+   "TARGET_MIPS5900 && !TARGET_MIPS16"
+   "*
+ {
+-  static char *const madd[] = { \"madd%H6\\t%1,%2\",
++  static const char* madd[] = { \"madd%H6\\t%1,%2\",
+ 				\"madd%H6\\t%0,%1,%2\",
+ 				\"#\" };
+   return madd[which_alternative % 3];
+@@ -3293,7 +3293,7 @@ zero_div_check:
+ 
+ (define_insn "minsf3"
+   [(set (match_operand:SF 0 "register_operand" "=f")
+-	(if_then_else (lt:SF 
++	(if_then_else:SF (le:SF 
+ 		(match_operand:SF 1 "register_operand" "f")
+ 		(match_operand:SF 2 "register_operand" "f"))
+ 	(match_dup 1) 
+@@ -3305,7 +3305,7 @@ zero_div_check:
+ 
+ (define_insn "maxsf3"
+   [(set (match_operand:SF 0 "register_operand" "=f")
+-	(if_then_else (gt:SF 
++	(if_then_else:SF (ge:SF 
+ 		(match_operand:SF 1 "register_operand" "f")
+ 		(match_operand:SF 2 "register_operand" "f"))
+ 	(match_dup 1) 
