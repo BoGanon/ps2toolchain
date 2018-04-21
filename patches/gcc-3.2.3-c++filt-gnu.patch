@@ -1,0 +1,23 @@
+diff -Nurp gcc-3.2.3-old/gcc/cp/Make-lang.in gcc-3.2.3/gcc/cp/Make-lang.in
+--- gcc-3.2.3-old/gcc/cp/Make-lang.in	2003-01-28 16:53:12.000000000 -0500
++++ gcc-3.2.3/gcc/cp/Make-lang.in	2016-09-30 20:53:55.370841721 -0400
+@@ -184,13 +184,13 @@ c++.install-common: installdirs
+ 	  fi ; \
+ 	  if [ x$(DEMANGLER_PROG) != x ] && [ -x "$(DEMANGLER_PROG)" ]; then \
+ 	    if [ -f g++-cross$(exeext) ] ; then \
+-	      rm -f $(DESTDIR)$(bindir)/$(DEMANGLER_CROSS_NAME)$(exeext); \
+-	      $(INSTALL_PROGRAM) $(DEMANGLER_PROG) $(DESTDIR)$(bindir)/$(DEMANGLER_CROSS_NAME)$(exeext); \
+-	      chmod a+x $(DESTDIR)$(bindir)/$(DEMANGLER_CROSS_NAME)$(exeext); \
++	      rm -f $(DESTDIR)$(bindir)/$(DEMANGLER_CROSS_NAME)-gnu$(exeext); \
++	      $(INSTALL_PROGRAM) $(DEMANGLER_PROG) $(DESTDIR)$(bindir)/$(DEMANGLER_CROSS_NAME)-gnu$(exeext); \
++	      chmod a+x $(DESTDIR)$(bindir)/$(DEMANGLER_CROSS_NAME)-gnu$(exeext); \
+ 	    else \
+-	      rm -f $(DESTDIR)$(bindir)/$(DEMANGLER_INSTALL_NAME)$(exeext); \
+-	      $(INSTALL_PROGRAM) $(DEMANGLER_PROG) $(DESTDIR)$(bindir)/$(DEMANGLER_INSTALL_NAME)$(exeext); \
+-	      chmod a+x $(DESTDIR)$(bindir)/$(DEMANGLER_INSTALL_NAME)$(exeext); \
++	      rm -f $(DESTDIR)$(bindir)/$(DEMANGLER_INSTALL_NAME)-gnu$(exeext); \
++	      $(INSTALL_PROGRAM) $(DEMANGLER_PROG) $(DESTDIR)$(bindir)/$(DEMANGLER_INSTALL_NAME)-gnu$(exeext); \
++	      chmod a+x $(DESTDIR)$(bindir)/$(DEMANGLER_INSTALL_NAME)-gnu$(exeext); \
+ 	    fi ; \
+ 	  fi ; \
+ 	fi
