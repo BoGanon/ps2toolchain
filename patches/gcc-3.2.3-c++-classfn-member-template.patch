@@ -1,0 +1,33 @@
+--- gcc/cp/decl2.c.orig	2003-04-15 12:26:44.000000000 -0400
++++ gcc/cp/decl2.c	2018-04-22 22:18:55.531176370 -0400
+@@ -1283,6 +1283,7 @@ check_classfn (ctype, function)
+   tree method_vec = CLASSTYPE_METHOD_VEC (complete_type (ctype));
+   tree *methods = 0;
+   tree *end = 0;
++  int is_template;
+   
+   if (DECL_USE_TEMPLATE (function)
+       && !(TREE_CODE (function) == TEMPLATE_DECL
+@@ -1300,6 +1301,10 @@ check_classfn (ctype, function)
+        find the method, but we don't complain.  */
+     return NULL_TREE;
+       
++  /* OK, is this a definition of a member template?  */
++  is_template = (TREE_CODE (function) == TEMPLATE_DECL
++                 || (processing_template_decl - template_class_depth (ctype)));
++
+   if (method_vec != 0)
+     {
+       methods = &TREE_VEC_ELT (method_vec, 0);
+@@ -1339,6 +1344,11 @@ check_classfn (ctype, function)
+ 			  && TREE_CODE (TREE_TYPE (function)) == METHOD_TYPE)
+ 			p1 = TREE_CHAIN (p1);
+ 
++		      /* A member template definition only matches a member template
++		         declaration.  */
++		      if (is_template != (TREE_CODE (fndecl) == TEMPLATE_DECL))
++		        continue;
++
+ 		      if (same_type_p (TREE_TYPE (TREE_TYPE (function)),
+ 				       TREE_TYPE (TREE_TYPE (fndecl)))
+ 			  && compparms (p1, p2)
