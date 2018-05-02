@@ -1,0 +1,200 @@
+diff -Nurp gcc-3.2.3-orig/gcc/config/mips/mips.h gcc-3.2.3/gcc/config/mips/mips.h
+--- gcc-3.2.3-orig/gcc/config/mips/mips.h	2018-05-02 11:49:02.698514656 -0400
++++ gcc-3.2.3/gcc/config/mips/mips.h	2018-05-02 14:25:46.212804929 -0400
+@@ -1050,14 +1050,13 @@ extern int mips_abi;
+ %{mint64|mlong64|mlong32:-mexplicit-type-size }\
+ %{miop:-march=r3000 -mfp32 -mgp32 -fno-builtin} \
+ %{mgp32: %{mfp64:%emay not use both -mgp32 and -mfp64} %{!mfp32: -mfp32}} \
+-%{G*} %{EB:-meb} %{EL:-mel} %{EB:%{EL:%emay not use both -EB and -EL}} \
++%(subtarget_cc1_spec) \
++%(cc1_cpu_spec) \
+ %{pic-none:   -mno-half-pic} \
+ %{pic-lib:    -mhalf-pic} \
+ %{pic-extern: -mhalf-pic} \
+ %{pic-calls:  -mhalf-pic} \
+-%{save-temps: } \
+-%(subtarget_cc1_spec) \
+-%(cc1_cpu_spec)"
++%{G*} %{EB:-meb} %{EL:-mel} %{EB:%{EL:%emay not use both -EB and -EL}}"
+ #endif
+ 
+ /* Preprocessor specs.  */
+@@ -1268,7 +1267,9 @@ extern int mips_abi;
+ %{.m:	-D__LANGUAGE_OBJECTIVE_C -D_LANGUAGE_OBJECTIVE_C -D__LANGUAGE_C -D_LANGUAGE_C} \
+ %{.S|.s: -D__LANGUAGE_ASSEMBLY -D_LANGUAGE_ASSEMBLY %{!ansi:-DLANGUAGE_ASSEMBLY}} \
+ %{!.S: %{!.s: %{!.cc: %{!.cxx: %{!.cpp: %{!.cp: %{!.c++: %{!.C: %{!.m: -D__LANGUAGE_C -D_LANGUAGE_C %{!ansi:-DLANGUAGE_C}}}}}}}}}} \
++%(subtarget_cpp_spec) \
+ %(subtarget_cpp_size_spec) \
++%(long_max_spec) \
+ %{mips3:-U__mips -D__mips=3 -D__mips64} \
+ %{mips4:-U__mips -D__mips=4 -D__mips64} \
+ %{mips32:-U__mips -D__mips=32} \
+@@ -1282,8 +1283,7 @@ extern int mips_abi;
+ %{mips16:%{!mno-mips16:-D__mips16}} \
+ %{EB:-UMIPSEL -U_MIPSEL -U__MIPSEL -U__MIPSEL__ -D_MIPSEB -D__MIPSEB -D__MIPSEB__ %{!ansi:-DMIPSEB}} \
+ %{EL:-UMIPSEB -U_MIPSEB -U__MIPSEB -U__MIPSEB__ -D_MIPSEL -D__MIPSEL -D__MIPSEL__ %{!ansi:-DMIPSEL}} \
+-%(long_max_spec) \
+-%(subtarget_cpp_spec) "
++"
+ #endif
+ 
+ /* This macro defines names of additional specifications to put in the specs
+diff -Nurp gcc-3.2.3-orig/gcc/config/mips/mips.md gcc-3.2.3/gcc/config/mips/mips.md
+--- gcc-3.2.3-orig/gcc/config/mips/mips.md	2018-05-02 11:57:09.575799587 -0400
++++ gcc-3.2.3/gcc/config/mips/mips.md	2018-05-01 18:15:53.186865782 -0400
+@@ -6771,17 +6771,17 @@ move\\t%0,%z4\\n\\
+    (set_attr "length"	"4,8,4,4,8,8,8,8,4,8,4,4")])
+ 
+ (define_insn "movdf_internal2"
+-  [(set (match_operand:DF 0 "nonimmediate_operand" "=d,d,d,R,To,*d")
+-	(match_operand:DF 1 "general_operand" "dG,R,ToF,d,d,*f"))]
++  [(set (match_operand:DF 0 "nonimmediate_operand" "=d,d,d,R,To,d,f,f")
++	(match_operand:DF 1 "general_operand" "dG,R,ToF,d,d,f,d,f"))]
+   "(TARGET_SOFT_FLOAT || TARGET_SINGLE_FLOAT) && !TARGET_MIPS16
+    && (register_operand (operands[0], DFmode)
+        || register_operand (operands[1], DFmode)
+        || (GET_CODE (operands[1]) == CONST_INT && INTVAL (operands[1]) == 0)
+        || operands[1] == CONST0_RTX (DFmode))"
+   "* return mips_move_2words (operands, insn); "
+-  [(set_attr "type"	"move,load,load,store,store,xfer")
++  [(set_attr "type"	"move,load,load,store,store,xfer,load,move")
+    (set_attr "mode"	"DF")
+-   (set_attr "length"	"8,8,16,8,16,8")])
++   (set_attr "length"	"8,8,16,8,16,8,8,4")])
+ 
+ (define_insn ""
+   [(set (match_operand:DF 0 "nonimmediate_operand" "=d,y,d,d,d,R,To")
+diff -Nurp gcc-3.2.3-orig/gcc/config/mips/r5900.h gcc-3.2.3/gcc/config/mips/r5900.h
+--- gcc-3.2.3-orig/gcc/config/mips/r5900.h	2018-05-02 11:49:02.706545056 -0400
++++ gcc-3.2.3/gcc/config/mips/r5900.h	2018-05-02 13:55:29.315194500 -0400
+@@ -134,40 +134,90 @@ do {
+ 
+ #undef CPP_PREDEFINES
+ #define CPP_PREDEFINES "\
+--D__ELF__ \
+--Dmips -D_mips -D__mips -D__mips__ \
+-%{!miop: -DR5900 -D_R5900 -D__R5900 -D_EE } \
+-%{miop: -DR3000 -D_3000 -D__3000 } \
+--DMIPSEL -D_MIPSEL -D__MIPSEL -D__MIPSEL__ \
+--Acpu(mips) -Amachine(mips) \
+-"
++ -D__ELF__\
++ -Dmips -D_mips -D__mips -D__mips__\
++ -DMIPSEL -D_MIPSEL -D__MIPSEL -D__MIPSEL__\
++ -Acpu(mips) -Amachine(mips)\
++ "
+ 
+-/* Default to 32-bit ints and 64-bit longs. */
++/* Default to 32-bit ints and 64-bit longs.
++   -mint64 changes the size of the int type. */
+ #undef SUBTARGET_CPP_SIZE_SPEC 
+ #define SUBTARGET_CPP_SIZE_SPEC "\
+-%{mgp64: -D_MIPS_SZPTR=32 } \
+-%{!mgp64: -D_MIPS_SZPTR=32 } \
+-\
+-%{mlong64:-D__SIZE_TYPE__=long\\ unsigned\\ int \
+-  -D__SSIZE_TYPE__=long\\ int \
+-  -D__PTRDIFF_TYPE__=long\\ int \
+-  -D_MIPS_SZLONG=64}  \
+-\
+-%{mint64:-D_MIPS_SZINT=64 \
+-  %{!mlong64:-D__SIZE_TYPE__=long\\ unsigned\\ int \
+-    -D__SSIZE_TYPE__=long\\ int \
+-    -D__PTRDIFF_TYPE__=long\\ int \
+-    -D_MIPS_SZLONG=64}} \
+-\
+-%{!mint64:-D_MIPS_SZINT=32 \
+-  %{!mlong64:-D__SIZE_TYPE__=unsigned\\ int \
+-    -D__SSIZE_TYPE__=int \
+-    -D__PTRDIFF_TYPE__=int \
+-    -D_MIPS_SZLONG=64}} \
+-"
++ %{mgp64: -D_MIPS_SZPTR=32}\
++ %{!mgp64: -D_MIPS_SZPTR=32}\
++ %{mlong64: -D__SIZE_TYPE__=unsigned\\ int\
++ -D__SSIZE_TYPE__=int\
++ -D__PTRDIFF_TYPE__=int\
++ -D_MIPS_SZLONG=64\
++ -D__INT32_TYPE__=int\
++ -D__INT64_TYPE__=long\\ int\
++ -D__UINT32_TYPE__=unsigned\\ int\
++ -D__UINT64_TYPE__=long\\ unsigned\\ int\
++ -D__INT_LEAST32_TYPE__=int\
++ -D__INT_LEAST64_TYPE__=long\\ int\
++ -D__UINT_LEAST32_TYPE__=unsigned\\ int\
++ -D__UINT_LEAST64_TYPE__=long\\ unsigned\\ int\
++ -D__INT8_TYPE__=char\
++ -D__INT16_TYPE__=short\\ int\
++ -D__UINT8_TYPE__=unsigned\\ char\
++ -D__UINT16_TYPE__=short\\ unsigned\\ int\
++ -D__INTMAX_TYPE__=long\\ int\
++ -D__UINTMAX_TYPE__=long\\ unsigned\\ int\
++ -D__INT_LEAST8_TYPE=char\
++ -D__INT_LEAST16_TYPE__=short\\ int\
++ -D__UINT_LEAST8_TYPE__=unsigned\\ char\
++ -D__UINT_LEAST16_TYPE__=short\\ unsigned\\ int\
++ -D__INT_FAST8_TYPE__=long\\ int\
++ -D__INT_FAST16_TYPE__=long\\ int\
++ -D__INT_FAST32_TYPE__=long\\ int\
++ -D__INT_FAST64_TYPE__=long\\ int\
++ -D__UINT_FAST8_TYPE__=long\\ unsigned\\ int\
++ -D__UINT_FAST16_TYPE__=long\\ unsigned\\ int\
++ -D__UINT_FAST32_TYPE__=long\\ unsigned\\ int\
++ -D__UINT_FAST64_TYPE__=long\\ unsigned\\ int\
++ -D__INTPTR_TYPE__=int\
++ -D__UINTPTR_TYPE__=unsigned\\ int}\
++ %{mint64: -D_MIPS_SZINT=64}\
++ %{!mint64: -D_MIPS_SZINT=32\
++  %{!mlong64: -D__SIZE_TYPE__=unsigned\\ int\
++ -D__SSIZE_TYPE__=int\
++ -D__PTRDIFF_TYPE__=int\
++ -D_MIPS_SZLONG=64\
++ -D__INT32_TYPE__=int\
++ -D__INT64_TYPE__=long\\ long\\ int\
++ -D__UINT32_TYPE__=unsigned\\ int\
++ -D__UINT64_TYPE__=long\\ long\\ unsigned\\ int\
++ -D__INT_LEAST32_TYPE__=int\
++ -D__INT_LEAST64_TYPE__=long\\ long\\ int\
++ -D__UINT_LEAST32_TYPE__=unsigned\\ int\
++ -D__UINT_LEAST64_TYPE__=long\\ long\\ unsigned\\ int\
++ -D__INT8_TYPE__=char\
++ -D__INT16_TYPE__=short\\ int\
++ -D__UINT8_TYPE__=unsigned\\ char\
++ -D__UINT16_TYPE__=short\\ unsigned\\ int\
++ -D__INTMAX_TYPE__=long\\ long\\ int\
++ -D__UINTMAX_TYPE__=long\\ long\\ unsigned\\ int\
++ -D__INT_LEAST8_TYPE=char\
++ -D__INT_LEAST16_TYPE__=short\\ int\
++ -D__UINT_LEAST8_TYPE__=unsigned\\ char\
++ -D__UINT_LEAST16_TYPE__=short\\ unsigned\\ int\
++ -D__INT_FAST8_TYPE__=long\\ long\\ int\
++ -D__INT_FAST16_TYPE__=long\\ long\\ int\
++ -D__INT_FAST32_TYPE__=long\\ long\\ int\
++ -D__INT_FAST64_TYPE__=long\\ long\\ int\
++ -D__UINT_FAST8_TYPE__=long\\ long\\ unsigned\\ int\
++ -D__UINT_FAST16_TYPE__=long\\ long\\ unsigned\\ int\
++ -D__UINT_FAST32_TYPE__=long\\ long\\ unsigned\\ int\
++ -D__UINT_FAST64_TYPE__=long\\ long\\ unsigned\\ int\
++ -D__INTPTR_TYPE__=int\
++ -D__UINTPTR_TYPE__=unsigned\\ int}}\
++ "
+ 
+ #undef SUBTARGET_CPP_SPEC 
+ #define SUBTARGET_CPP_SPEC "\
++%{!miop: -DR5900 -D_R5900 -D__R5900 -D_EE} \
++%{miop: -DR3000 -D_3000 -D__3000} \
+ %{mfp32: -D_MIPS_FPSET=16}%{!mfp32: -D_MIPS_FPSET=32} \
+ %{mips1: -U_MIPS_ISA -D_MIPS_ISA=_MIPS_ISA_MIPS1} \
+ %{mips2: -U_MIPS_ISA -D_MIPS_ISA=_MIPS_ISA_MIPS2} \
+@@ -185,9 +235,8 @@ do {
+ %{.S:	-D__LANGUAGE_ASSEMBLY__ %{!ansi:-DLANGUAGE_ASSEMBLY}} \
+ %{.s:	-D__LANGUAGE_ASSEMBLY__ %{!ansi:-DLANGUAGE_ASSEMBLY}} \
+ %{!.S: %{!.s: %{!.cc: %{!.cxx: %{!.C: %{!.m: -D__LANGUAGE_C__ %{!ansi:-DLANGUAGE_C}}}}}} } \
+-%{ansi:-Uunix -Ulinux -Umips -UR3000 -UMIPSEB -UMIPSEL} \
+-%{ffast-math: -D__FAST_MATH__} \
+- "
++%{ansi:-Uunix -Ulinux -Umips -UR3000 -UR5900 -UMIPSEB -UMIPSEL} \
++"
+ 
+ /* The GNU C++ standard library requires that these macros be defined.  */
+ #undef CPLUSPLUS_CPP_SPEC
