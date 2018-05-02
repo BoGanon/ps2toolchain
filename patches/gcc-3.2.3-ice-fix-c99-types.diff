@@ -1,7 +1,7 @@
 diff -Nurp gcc-3.2.3-orig/gcc/config/mips/mips.h gcc-3.2.3/gcc/config/mips/mips.h
 --- gcc-3.2.3-orig/gcc/config/mips/mips.h	2018-05-02 11:49:02.698514656 -0400
-+++ gcc-3.2.3/gcc/config/mips/mips.h	2018-05-02 14:25:46.212804929 -0400
-@@ -1050,14 +1050,13 @@ extern int mips_abi;
++++ gcc-3.2.3/gcc/config/mips/mips.h	2018-05-02 15:48:25.106096286 -0400
+@@ -1050,14 +1050,14 @@ extern int mips_abi;
  %{mint64|mlong64|mlong32:-mexplicit-type-size }\
  %{miop:-march=r3000 -mfp32 -mgp32 -fno-builtin} \
  %{mgp32: %{mfp64:%emay not use both -mgp32 and -mfp64} %{!mfp32: -mfp32}} \
@@ -12,14 +12,14 @@ diff -Nurp gcc-3.2.3-orig/gcc/config/mips/mips.h gcc-3.2.3/gcc/config/mips/mips.
  %{pic-lib:    -mhalf-pic} \
  %{pic-extern: -mhalf-pic} \
  %{pic-calls:  -mhalf-pic} \
--%{save-temps: } \
+ %{save-temps: } \
 -%(subtarget_cc1_spec) \
 -%(cc1_cpu_spec)"
 +%{G*} %{EB:-meb} %{EL:-mel} %{EB:%{EL:%emay not use both -EB and -EL}}"
  #endif
  
  /* Preprocessor specs.  */
-@@ -1268,7 +1267,9 @@ extern int mips_abi;
+@@ -1268,7 +1268,9 @@ extern int mips_abi;
  %{.m:	-D__LANGUAGE_OBJECTIVE_C -D_LANGUAGE_OBJECTIVE_C -D__LANGUAGE_C -D_LANGUAGE_C} \
  %{.S|.s: -D__LANGUAGE_ASSEMBLY -D_LANGUAGE_ASSEMBLY %{!ansi:-DLANGUAGE_ASSEMBLY}} \
  %{!.S: %{!.s: %{!.cc: %{!.cxx: %{!.cpp: %{!.cp: %{!.c++: %{!.C: %{!.m: -D__LANGUAGE_C -D_LANGUAGE_C %{!ansi:-DLANGUAGE_C}}}}}}}}}} \
@@ -29,7 +29,7 @@ diff -Nurp gcc-3.2.3-orig/gcc/config/mips/mips.h gcc-3.2.3/gcc/config/mips/mips.
  %{mips3:-U__mips -D__mips=3 -D__mips64} \
  %{mips4:-U__mips -D__mips=4 -D__mips64} \
  %{mips32:-U__mips -D__mips=32} \
-@@ -1282,8 +1283,7 @@ extern int mips_abi;
+@@ -1282,8 +1284,7 @@ extern int mips_abi;
  %{mips16:%{!mno-mips16:-D__mips16}} \
  %{EB:-UMIPSEL -U_MIPSEL -U__MIPSEL -U__MIPSEL__ -D_MIPSEB -D__MIPSEB -D__MIPSEB__ %{!ansi:-DMIPSEB}} \
  %{EL:-UMIPSEB -U_MIPSEB -U__MIPSEB -U__MIPSEB__ -D_MIPSEL -D__MIPSEL -D__MIPSEL__ %{!ansi:-DMIPSEL}} \
