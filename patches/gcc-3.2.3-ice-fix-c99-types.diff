@@ -66,7 +66,7 @@ diff -Nurp gcc-3.2.3-orig/gcc/config/mips/mips.md gcc-3.2.3/gcc/config/mips/mips
    [(set (match_operand:DF 0 "nonimmediate_operand" "=d,y,d,d,d,R,To")
 diff -Nurp gcc-3.2.3-orig/gcc/config/mips/r5900.h gcc-3.2.3/gcc/config/mips/r5900.h
 --- gcc-3.2.3-orig/gcc/config/mips/r5900.h	2018-05-02 11:49:02.706545056 -0400
-+++ gcc-3.2.3/gcc/config/mips/r5900.h	2018-05-02 13:55:29.315194500 -0400
++++ gcc-3.2.3/gcc/config/mips/r5900.h	2018-05-02 15:27:39.064656590 -0400
 @@ -134,40 +134,90 @@ do {
  
  #undef CPP_PREDEFINES
@@ -127,8 +127,8 @@ diff -Nurp gcc-3.2.3-orig/gcc/config/mips/r5900.h gcc-3.2.3/gcc/config/mips/r590
 + -D__INT16_TYPE__=short\\ int\
 + -D__UINT8_TYPE__=unsigned\\ char\
 + -D__UINT16_TYPE__=short\\ unsigned\\ int\
-+ -D__INTMAX_TYPE__=long\\ int\
-+ -D__UINTMAX_TYPE__=long\\ unsigned\\ int\
++ -D__INTMAX_TYPE__=long\\ long\\ int\
++ -D__UINTMAX_TYPE__=long\\ long\\ unsigned\\ int\
 + -D__INT_LEAST8_TYPE=char\
 + -D__INT_LEAST16_TYPE__=short\\ int\
 + -D__UINT_LEAST8_TYPE__=unsigned\\ char\
@@ -150,13 +150,13 @@ diff -Nurp gcc-3.2.3-orig/gcc/config/mips/r5900.h gcc-3.2.3/gcc/config/mips/r590
 + -D__PTRDIFF_TYPE__=int\
 + -D_MIPS_SZLONG=64\
 + -D__INT32_TYPE__=int\
-+ -D__INT64_TYPE__=long\\ long\\ int\
++ -D__INT64_TYPE__=long\\ int\
 + -D__UINT32_TYPE__=unsigned\\ int\
-+ -D__UINT64_TYPE__=long\\ long\\ unsigned\\ int\
++ -D__UINT64_TYPE__=long\\ unsigned\\ int\
 + -D__INT_LEAST32_TYPE__=int\
-+ -D__INT_LEAST64_TYPE__=long\\ long\\ int\
++ -D__INT_LEAST64_TYPE__=long\\ int\
 + -D__UINT_LEAST32_TYPE__=unsigned\\ int\
-+ -D__UINT_LEAST64_TYPE__=long\\ long\\ unsigned\\ int\
++ -D__UINT_LEAST64_TYPE__=long\\ unsigned\\ int\
 + -D__INT8_TYPE__=char\
 + -D__INT16_TYPE__=short\\ int\
 + -D__UINT8_TYPE__=unsigned\\ char\
@@ -167,14 +167,14 @@ diff -Nurp gcc-3.2.3-orig/gcc/config/mips/r5900.h gcc-3.2.3/gcc/config/mips/r590
 + -D__INT_LEAST16_TYPE__=short\\ int\
 + -D__UINT_LEAST8_TYPE__=unsigned\\ char\
 + -D__UINT_LEAST16_TYPE__=short\\ unsigned\\ int\
-+ -D__INT_FAST8_TYPE__=long\\ long\\ int\
-+ -D__INT_FAST16_TYPE__=long\\ long\\ int\
-+ -D__INT_FAST32_TYPE__=long\\ long\\ int\
-+ -D__INT_FAST64_TYPE__=long\\ long\\ int\
-+ -D__UINT_FAST8_TYPE__=long\\ long\\ unsigned\\ int\
-+ -D__UINT_FAST16_TYPE__=long\\ long\\ unsigned\\ int\
-+ -D__UINT_FAST32_TYPE__=long\\ long\\ unsigned\\ int\
-+ -D__UINT_FAST64_TYPE__=long\\ long\\ unsigned\\ int\
++ -D__INT_FAST8_TYPE__=long\\ int\
++ -D__INT_FAST16_TYPE__=long\\ int\
++ -D__INT_FAST32_TYPE__=long\\ int\
++ -D__INT_FAST64_TYPE__=long\\ int\
++ -D__UINT_FAST8_TYPE__=long\\ unsigned\\ int\
++ -D__UINT_FAST16_TYPE__=long\\ unsigned\\ int\
++ -D__UINT_FAST32_TYPE__=long\\ unsigned\\ int\
++ -D__UINT_FAST64_TYPE__=long\\ unsigned\\ int\
 + -D__INTPTR_TYPE__=int\
 + -D__UINTPTR_TYPE__=unsigned\\ int}}\
 + "
